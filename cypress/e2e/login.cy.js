@@ -1,13 +1,15 @@
-// const { describe } = require("mocha")
-
 describe('login', () => {
-  it('Deve logar com sucesso', () => {
-    // cy.viewport(1920, 1080)
+
+  beforeEach(() => {
+    cy.viewport(1440, 900)
+
     cy.visit('https://playground.cyskills.com.br/login')
    
     cy.contains('h2', 'Faça login')
       .should('be.visible')
+  })
 
+  it('Deve logar com sucesso', () => {
     cy.get('[data-cy="email"]')
       .type('papito@cyskills.com.br')
 
@@ -23,12 +25,6 @@ describe('login', () => {
   })
 
   it('Não deve logar com senha inválida', () => {
-    // cy.viewport(1920, 1080)
-    cy.visit('https://playground.cyskills.com.br/login')
-   
-    cy.contains('h2', 'Faça login')
-      .should('be.visible')
-
     cy.get('[data-cy="email"]')
       .type('papito@cyskills.com.br')
 
@@ -44,12 +40,6 @@ describe('login', () => {
   })
 
   it('Não deve logar com e-mail não cadastrado', () => {
-    // cy.viewport(1920, 1080)
-    cy.visit('https://playground.cyskills.com.br/login')
-   
-    cy.contains('h2', 'Faça login')
-      .should('be.visible')
-
     cy.get('[data-cy="email"]')
       .type('404@cyskills.com.br')
 
@@ -66,12 +56,6 @@ describe('login', () => {
 
   
   it('Não deve logar com e-mail incorreto', () => {
-    // cy.viewport(1920, 1080)
-    cy.visit('https://playground.cyskills.com.br/login')
-   
-    cy.contains('h2', 'Faça login')
-      .should('be.visible')
-
     cy.get('[data-cy="email"]')
       .type('www.linkedin.com')
 
