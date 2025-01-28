@@ -43,7 +43,8 @@ Cypress.Commands.add("userLoggedIn", () => {
 });
 
 Cypress.Commands.add("noticeHave", (text) => {
-  cy.get(".notice p").should("be.visible").and("have.text", text);
+  cy.get(".notice p").should("be.visible")
+    .and("have.text", text);
 });
 
 Cypress.Commands.add('goTo', (route, tittle) => {
