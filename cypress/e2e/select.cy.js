@@ -19,16 +19,19 @@ describe('', () => {
 
     it.only('Deve selecionar as linguagens que utiliza Node.js', () => {
 
-        const langs = ['TypeScript', 'JavaScript']
+        const langs = ['TypeScript', 'Java', 'Python']
         
         cy.get('input[placeholder^="Linguagens de programação"]')
             .click()
 
         langs.forEach(lang => {
-            cy.contains('.option-item', lang)
+            cy.contains('.option-item', new RegExp ("^" + lang + "$"))
             .click()
         }) 
         
+        cy.get('.language-item')
+            .should('have.length', langs.length)
+
     })
 })
 
