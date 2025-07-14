@@ -1,4 +1,4 @@
-describe('', () => {
+describe('Select', () => {
  
     beforeEach(() => {
         cy.goHome();
@@ -19,7 +19,7 @@ describe('', () => {
 
     it.only('Deve selecionar as linguagens que utiliza Node.js', () => {
 
-        const langs = ['TypeScript', 'Java', 'Python']
+        const langs = ['TypeScript', 'JavaScript', 'Python']
         
         cy.get('input[placeholder^="Linguagens de programação"]')
             .click()
@@ -29,8 +29,8 @@ describe('', () => {
             .click()
         }) 
         
-        cy.get('.language-item')
-            .should('have.length', langs.length)
+        cy.get('.language-item') 
+            .should('have.length', 3  )
 
     })
 })
