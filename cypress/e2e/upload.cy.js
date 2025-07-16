@@ -8,7 +8,7 @@ describe('Upload', ()=> {
     
         cy.goTo('/upload', 'Upload');
       });   
-
+''
     it('deve anexar um doc', () => {
         cy.get('input[name="doc"]')
         .selectFile('cypress/fixtures/CV-AnalistaTestesQA.pdf')
