@@ -31,8 +31,15 @@ Cypress.Commands.add("goHome", () => {
 });
 
 Cypress.Commands.add("login", (email, password) => {
-  cy.get('[data-cy="email"]').type(email);
-  cy.get('[data-cy="password"]').type(password);
+
+  if(email){
+    cy.get('[data-cy="email"]').type(email);
+  } // condicional para caso o campo email não seja preenchido  
+
+  if(password){
+    cy.get('[data-cy="password"]').type(password);
+  }// condicional para caso o campo senha não seja preenchido  
+
   cy.get('[data-cy="login-button"]').click();
 });
 
