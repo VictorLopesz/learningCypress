@@ -30,6 +30,12 @@ Cypress.Commands.add("goHome", () => {
   cy.contains("h2", "Faça login").should("be.visible");
 });
 
+//Helper, para ajudar no fluxo de automação 
+Cypress.Commands.add("doLogin", () => {
+    cy.login("papito@cyskills.com.br", "showtime");
+    cy.userLoggedIn()
+})
+
 Cypress.Commands.add("login", (email, password) => {
 
   if(email){

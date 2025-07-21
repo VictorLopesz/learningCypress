@@ -2,13 +2,10 @@ describe('Upload', ()=> {
 
     beforeEach(() => {
         cy.goHome();
-    
-        cy.login('papito@cyskills.com.br', 'showtime');
-        cy.userLoggedIn();
-    
+        cy.doLogin();
         cy.goTo('/upload', 'Upload');
       });   
-''
+      
     it('deve anexar um doc', () => {
         cy.get('input[name="doc"]')
         .selectFile('cypress/fixtures/CV-AnalistaTestesQA.pdf')
