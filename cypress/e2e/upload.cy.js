@@ -15,7 +15,7 @@ describe('Upload', ()=> {
         })
     })
     
-        it.only('deve anexar uma imagem', () => {
+        it('deve anexar uma imagem', () => {
         cy.get('input[name="photo"]')
         .selectFile('cypress/fixtures/captura.png')
         //função callback

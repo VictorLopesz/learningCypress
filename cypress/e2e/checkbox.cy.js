@@ -11,7 +11,7 @@ describe("Checkbox", () => {
     cy.get('label[for="typescript"]').click();
   });
 
-  it.only("Deve marcar todas as linguagens", () => {
+  it("Deve marcar todas as linguagens", () => {
     const langs = ["javascript", "python", "rust", "go", "typescript"];
 
     langs.forEach((lang) => {

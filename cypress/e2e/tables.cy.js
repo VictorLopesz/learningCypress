@@ -46,7 +46,7 @@ describe("Tables", () => {
       .should("be.visible", name); // utiliza a constante para verificar se ele permanece lá
   });
 
-  it.only("Deve validar no link que abre o instagram em outra aba", () => {
+  it("Deve validar no link que abre o instagram em outra aba", () => {
     const id = "instapapito";
 
     cy.contains("table tbody tr", id)
