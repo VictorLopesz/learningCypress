@@ -1,55 +1,58 @@
-describe('Tables', () => {
+describe("Tables", () => {
+  beforeEach(() => {
+    cy.goHome();
+    cy.doLogin();
+    cy.goTo("/tables", "Tables");
+  });
 
-    beforeEach(() => {
-        cy.goHome();
-        cy.doLogin();
-        cy.goTo('/tables', 'Tables');
-    });  
+  it("Deve validar o github", () => {
+    cy.contains("table tbody tr", "1004") // verifica se contém uma linha na tabela com o ID '1004'
+      .should("be.visible") // verifica se está visivel, e faz as verificações necessárias
+      .should("contain", "Github")
+      .should("contain", "Ativo")
+      .should("contain", "papitodev");
+  });
 
-    it('Deve validar o github', () => {
-      
-        cy.contains('table tbody tr', '1004') // verifica se contém uma linha na tabela com o ID '1004'
-          .should('be.visible')    // verifica se está visivel, e faz as verificações necessárias
-          .should('contain', 'Github') 
-          .should('contain', 'Ativo') 
-          .should('contain', 'papitodev')
-    })
+  it("Deve verificar se está indisponível e inativo", () => {
+    cy.contains("table tbody tr", "1002")
+      .should("be.visible")
+      .should("contain", "Facebook")
+      .should("contain", "Indisponível");
+  });
 
-    it('Deve verificar se está indisponível e inativo', () =>{
+  it("Deve remover uma rede social", () => {
+    const name = "Facebook";
 
-        cy.contains('table tbody tr', '1002')
-            .should('be.visible')
-            .should('contain', 'Facebook')
-            .should('contain', 'Indisponível')
-    })
+    cy.contains("table tbody tr", "1002") // pegando o elemento pelo ID
+      .find(".remove-item") // depois de encontra-lo
+      .click(); // utiliza o evento de clique
 
-    it('Deve remover uma rede social', () => {
+    cy.contains("button", "Excluir").click();
 
-        const name = 'Facebook'
+    cy.get("table tbody") // faz a validação para saber se o elemento foi excluído
+      .should("not.contain", name); // utiliza a constante para verificar se não contém mais ele
+  });
 
-        cy.contains('table tbody tr', '1002') // pegando o elemento pelo ID
-            .find('.remove-item') // depois de encontra-lo
-            .click() // utiliza o evento de clique
+  it("Deve permanecer na tabela ao desistir da exclusão", () => {
+    const name = "Youtube";
 
-        cy.contains('button', 'Excluir') 
-            .click()
+    cy.contains("table tbody tr", "1005") // pegando o elemento pelo ID
+      .find(".remove-item") // depois de encontra-lo
+      .click(); // utiliza o evento de clique
 
-        cy.get('table tbody') // faz a validação para saber se o elemento foi excluído
-            .should('not.contain', name) // utiliza a constante para verificar se não contém mais ele
-    })
+    cy.contains("button", "Cancelar").click();
 
-     it('Deve permanecer na tabela ao desistir da exclusão', () => {
+    cy.get("table tbody") // faz a validação para saber se o elemento NÃO foi excluído
+      .should("be.visible", name); // utiliza a constante para verificar se ele permanece lá
+  });
 
-        const name = 'Youtube'
+  it.only("Deve validar no link que abre o instagram em outra aba", () => {
+    const id = "instapapito";
 
-        cy.contains('table tbody tr', '1005') // pegando o elemento pelo ID
-            .find('.remove-item') // depois de encontra-lo
-            .click() // utiliza o evento de clique
-
-        cy.contains('button', 'Cancelar') 
-            .click()
-
-        cy.get('table tbody') // faz a validação para saber se o elemento NÃO foi excluído
-            .should('be.visible', name) // utiliza a constante para verificar se ele permanece lá
-    })
-})
+    cy.contains("table tbody tr", id)
+      .contains("a", "Visitar")
+      .click()
+      .should("have.attr", "href", "https://instagram.com/instapapito")
+      .and("have.attr", "target", "_blank");
+  });
+});

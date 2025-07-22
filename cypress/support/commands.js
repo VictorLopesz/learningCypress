@@ -25,8 +25,7 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 Cypress.Commands.add("goHome", () => {
-  cy.viewport(1500, 800);
-  cy.visit("https://playground.cyskills.com.br/login");
+  cy.visit('/');
   cy.contains("h2", "Faça login").should("be.visible");
 });
 
